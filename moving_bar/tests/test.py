@@ -71,8 +71,10 @@ class TestScript(unittest.TestCase):
         test_str = '12345'
         self.state_params['row_str'] = test_str
 
+        # Ensures that all rows are identical
         def side_effect(matrix_str):
             row_strs = matrix_str.split(':')
+            # Get rid of dummy element.
             row_strs.pop()
             self.assertEqual(5, len(row_strs))
             for row_str in row_strs:
