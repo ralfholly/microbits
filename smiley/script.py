@@ -1,19 +1,19 @@
 import microbit as mbit
 
-TICKS_TO_DISPLAY = 10
+MS_PER_TICK = 100
+SHOW_SMILEY_MS = 3000
+SHOW_SMILEY_TICKS = SHOW_SMILEY_MS // MS_PER_TICK
 
 def update(timer):
     if mbit.button_a.was_pressed():
         mbit.display.show(mbit.Image.HAPPY)
-        timer = TICKS_TO_DISPLAY
-    elif mbit.button_b.was_pressed():
-        mbit.display.show(mbit.Image.SAD)
-        timer = TICKS_TO_DISPLAY
+        timer = SHOW_SMILEY_TICKS
     else:
         if timer > 0:
             timer -= 1
             if timer == 0:
                 mbit.display.clear()
+
     return timer
 
 
@@ -22,7 +22,7 @@ def main():
 
     while True:
         display_timer = update(display_timer)
-        mbit.sleep(100)
+        mbit.sleep(MS_PER_TICK)
 
 
 if __name__ == '__main__':
