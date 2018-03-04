@@ -12,6 +12,7 @@ class TestScript(unittest.TestCase):
 
     def setUp(self):
         global mbit
+        # Start every test with clean mocks.
         mbit = importlib.reload(mbit)
 
 
@@ -29,6 +30,7 @@ class TestScript(unittest.TestCase):
             script.update(0)
         self.assertEqual(0, mbit.display.show.call_count)
 
+
     # pylint:disable=invalid-name
     def test_smiley_shown_if_button_a_pressed(self):
         script.update(0)
@@ -38,6 +40,7 @@ class TestScript(unittest.TestCase):
         timer = script.update(0)
         mbit.display.show.assert_called_once_with(mbit.Image.HAPPY)
         self.assertEqual(script.SHOW_SMILEY_TICKS, timer)
+
 
     def test_ticks_count_down(self):
         timer = script.SHOW_SMILEY_TICKS
