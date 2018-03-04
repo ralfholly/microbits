@@ -1,4 +1,5 @@
 import unittest
+import importlib
 from unittest.mock import Mock
 
 # Mock libs used by SUT.
@@ -10,10 +11,8 @@ import script
 class TestScript(unittest.TestCase):
 
     def setUp(self):
-        mbit.button_a.was_pressed.return_value = False
-        mbit.Image = Mock()
-        mbit.display.show = Mock()
-        mbit.display.clear = Mock()
+        global mbit
+        mbit = importlib.reload(mbit)
 
 
     def tearDown(self):
